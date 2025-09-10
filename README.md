@@ -1,4 +1,4 @@
-This is a practical exerchise to deploy a simplified AWS infrastructure.
+This is a practical exercise to deploy a simplified AWS infrastructure.
 
 1. Architecture decisions and technical requirements
 
