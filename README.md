@@ -38,5 +38,5 @@ To extract the public IP address of the API endpoint use the following command (
              ((b_filter==true)&&($1=="public_ip")) {print $3}' | \
         cut -d '"' -f2
 
-To test the service run "curl -v http://<the IP address obttained above>"
+To test the service run "curl -v http://x.x.x.x" where x.x.x.x is the IP address obtained above.
 And to remove the resources so created run "terraform destroy".
