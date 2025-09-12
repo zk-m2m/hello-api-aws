@@ -33,7 +33,7 @@ The code is split to three files only:
 - the AWS infrastructure setup (vpc.tf)
 - the application service deployment (ec2.tf)
 
-The name of the image to be deployed is currently hard-coded in the cloud-init config, and is burried in a base64 string as expected by AWS.
+The image to be deployed is selected by filtering the Amazon Linux v3 (AL2023) images.
 
 In a real-life scenario that portion should be kept in a variable, and the variable value will be generated via CI/CD scripts, or will be fed as a pipeline parameter file.
 
@@ -46,11 +46,13 @@ The code assumes an AWS profile named "dev" is used and configured.
 To create the infrastructure run "terraform apply".
 
 To extract the public IP address of the API endpoint use the following command (in a *nix shell, for example bash):
+```
         terraform show | \
         awk '(($1=="resource")&&($2=="\"aws_instance\"")&&($3=="\"ec2-docker-hello\"")) {b_filter=true} \
              $0=="" {b_filter=false} \
              ((b_filter==true)&&($1=="public_ip")) {print $3}' | \
         cut -d '"' -f2
+```
 
 To test the service run "curl -v http://x.x.x.x" where x.x.x.x is the IP address obtained above.
 
