@@ -48,9 +48,12 @@ To create the infrastructure run "terraform apply".
 To extract the public IP address of the API endpoint use the following command (in a *nix shell, for example bash):
 ```
         terraform show | \
-        awk '(($1=="resource")&&($2=="\"aws_instance\"")&&($3=="\"ec2-docker-hello\"")) {b_filter=true} \
-             $0=="" {b_filter=false} \
-             ((b_filter==true)&&($1=="public_ip")) {print $3}' | \
+        awk '(($1=="resource")&&($2=="\"aws_instance\"")&&($3=="\"ec2-docker-hello\"")) \
+                 {b_filter=true} \
+             $0=="" \
+                 {b_filter=false} \
+             ((b_filter==true)&&($1=="public_ip")) \
+                 {print $3}' | \
         cut -d '"' -f2
 ```
 
